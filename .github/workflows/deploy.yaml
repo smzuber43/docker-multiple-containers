@@ -14,12 +14,10 @@ jobs:
       - run: docker build -t smz/react-test -f ./client/Dockerfile.dev ./client
       - run: docker run -e CI=true smz/react-test npm test
 
-      - run: docker build -t smz/multi-client ./client
-      - run: docker build -t smz/multi-nginx ./nginx
-      - run: docker build -t smz/multi-server ./server
-      - run: docker build -t smz/multi-worker ./worker
-
-      - run: docker push smz/multi-client
-      - run: docker push smz/multi-nginx
-      - run: docker push smz/multi-server
-      - run: docker push smz/multi-worker
+      - name: Build and push Docker image to DockerHub
+        uses: docker/build-push-action@v2
+        with:
+          context: ./client
+          file: ./Dockerfile
+          push: true
+          tags: larasai/maven-web-app:v1
