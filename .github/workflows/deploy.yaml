@@ -18,6 +18,11 @@ jobs:
       - run: docker build -t smz/multi-server ./server
       - run: docker build -t smz/multi-worker ./worker
 
+      - run: docker tag multi-client smz/multi-client
+      - run: docker tag multi-nginx smz/multi-nginx
+      - run: docker tag multi-server smz/multi-server
+      - run: docker tag multi-worker smz/multi-worker
+
       - run: docker push smz/multi-client
       - run: docker push smz/multi-nginx
       - run: docker push smz/multi-server
